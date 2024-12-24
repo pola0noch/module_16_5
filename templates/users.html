@@ -15,9 +15,9 @@
             <br>
             <div class="card">
                 <ul class="list-group list-group-flush">
-                    {% for user in users_list %}
+                    {% for user in users %}
                     <li class="list-group-item">
-                        <a href="/user/{{ user.id }}">{{ user.username }}</a> (ID: {{ user.id }})
+                        <a href="/users/{{ user.id }}">{{ user.username }}</a> (ID: {{ user.id }})
                     </li>
                     {% else %}
                         <li class="list-group-item">No users found.</li>
