@@ -25,10 +25,10 @@ async def get_users(request: Request, user_id: Annotated[int, Path(ge=1,
                                                    description='User id is int',
                                                    title='Enter User ID',
                                                    example=1)]) -> HTMLResponse:
-    try:
-        return templates.TemplateResponse("users.html", {"request": request, "user": users[user_id - 1]})
-    except IndexError:
-        raise HTTPException(status_code=404, detail='User was not found')
+    user = next((u for u in users if u.id == user_id), None)
+    if user is None:
+        raise HTTPException(status_code=404, detail='User  was not found')
+    return templates.TemplateResponse("users.html", {"request": request, "user": user})
 
 
 @app.post("/user/{username}/{age}")
